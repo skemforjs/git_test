@@ -1,0 +1,19 @@
+﻿* { margin:0 auto; }
+ul li { list-style:none; }
+a { color:#333; text-decoration:none; }
+.wrap { width:1200px; }
+.wrap .submit_wrap label { width:90px; display:inline-block; }
+.wrap .submit_wrap .list table { width:100%; border-collapse: collapse; }
+.wrap .submit_wrap .list table th { border-top:1px solid #ddd; border-bottom:1px solid #ddd; padding:10px; }
+.wrap .submit_wrap .list table td { border-top:1px solid #ddd; border-bottom:1px solid #ddd; padding:10px; }
+.wrap .submit_wrap .list table td:last-child { text-align:center; }
+.wrap .submit_wrap .list table th .rank_type { cursor:pointer; }
+.paging { text-align:center; }
+.paging span { cursor:pointer; }
+.paging .nowpage { color:#f00; cursor:no-drop; }
+.wrap .submit_wrap .detail table { width:100%; border-collapse: collapse; }
+.wrap .submit_wrap .detail table th { border: 1px solid #ddd; padding:10px; }
+.wrap .submit_wrap .detail table td { text-align:center; border:1px solid #ddd; padding:10px; }
+.wrap .submit_wrap .coment_list table { width:100%; border-collapse: collapse; }
+.wrap .submit_wrap .coment_list table th { border: 1px solid #ddd; padding:10px; }
+.wrap .submit_wrap .coment_list table td { text-align:center; border:1px solid #ddd; padding:10px; }

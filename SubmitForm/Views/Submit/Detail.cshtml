@@ -1,0 +1,102 @@
+﻿@model SubmitForm.Models.Detail_List
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="submit_wrap">
+    <div class="detail">
+        <table>
+            <colgroup>
+                <col style="width:30%;" />
+                <col />
+            </colgroup>
+            <tr>
+                <th>이름</th>
+                <td>@Model.detail.name</td>
+            </tr>
+            <tr>
+                <th>제목</th>
+                <td>@Model.detail.title</td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td>                    
+                    @Html.Raw(Model.detail.contents)
+                </td>
+            </tr>
+            <tr>
+                <th>전화번호</th>
+                <td>@Model.detail.hp1 - @Model.detail.hp2 - @Model.detail.hp3</td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td>
+                    @Model.detail.post_no<br />
+                    @Model.detail.adress1 @Model.detail.adress2
+                </td>
+            </tr>
+            <tr>
+                <th>생일</th>
+                <td>@Model.detail.birth_dt</td>
+            </tr>            
+        </table>
+        <div>
+            <a href="/Submit/Modify?seq=@Model.detail.seq">수정하기</a>
+            <a href="/Submit/List">목록</a>
+        </div>        
+    </div>
+    <div class="coment">
+        <div class="coment_list">
+            <table>
+                <colgroup>
+                    <col style="width:70%;" />
+                    <col />
+                </colgroup>
+                    @if (Model.coment_list != null && Model.coment_list.Count != 0)
+                    {
+                        foreach (var item in Model.coment_list)
+                        {
+                            <tr>
+                                <td>@item.coment</td>
+                                <th>@item.reg_dt</th>
+                            </tr>
+                        }
+                    }                    
+            </table>
+            <div class="paging">
+                @if (ViewBag.totalblock == 1)
+                {
+                    <span class="nowpage">1</span>
+                }
+                @if (ViewBag.firstpage != 1)
+                {
+                    <span onclick="location.href='/Submit/Detail?seq=@ViewBag.seq&row_page_h=@ViewBag.rowsPerPage&pageNumber=1'">&lt;&lt;</span>
+                    <span onclick="location.href='/Submit/Detail?seq=@ViewBag.seq&row_page_h=@ViewBag.rowsPerPage&pageNumber=@(ViewBag.firstpage - 1)'">&lt;</span>
+                }
+                @for (int? i = ViewBag.firstpage; i <= ViewBag.lastpage; i++)
+                {
+                    if (ViewBag.nowpage == i)
+                    {
+                        <span class="nowpage">@i</span>
+                    }
+                    else
+                    {
+                        <span onclick="location.href='/Submit/Detail?seq=@ViewBag.seq&row_page_h=@ViewBag.rowsPerPage&pageNumber=@i'">@i</span>
+                    }
+                }
+                @if (ViewBag.lastpage != ViewBag.totalblock)
+                {
+                    <span onclick="location.href='/Submit/Detail?seq=@ViewBag.seq&row_page_h=@ViewBag.rowsPerPage&pageNumber=@(ViewBag.lastpage + 1)'">&gt;</span>
+                    <span onclick="location.href='/Submit/Detail?seq=@ViewBag.seq&row_page_h=@ViewBag.rowsPerPage&pageNumber=@(ViewBag.totalblock)'">&gt;&gt;</span>
+                }
+            </div>
+
+        </div>
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { }))
+        {
+            @Html.HiddenFor(m => m.detail.seq)            
+            @Html.TextAreaFor(m => m.coment.coment)
+            <button id="coment_btn" type="submit">등록</button>
+        }
+    </div>
+</div>
+

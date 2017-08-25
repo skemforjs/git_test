@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="testModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TB_COMENT">
+          <Key>
+            <PropertyRef Name="seq" />
+          </Key>
+          <Property Name="seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="submit_seq" Type="int" />
+          <Property Name="coment" Type="nvarchar(max)" />
+          <Property Name="reg_dt" Type="datetime" />
+          <Property Name="edit_dt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TB_SUBMIT">
+          <Key>
+            <PropertyRef Name="seq" />
+          </Key>
+          <Property Name="seq" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="submit_seq" Type="int" />
+          <Property Name="submit_no" Type="int" />
+          <Property Name="submit_depth" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="250" />
+          <Property Name="contents" Type="nvarchar(max)" />
+          <Property Name="hp1" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="hp2" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="hp3" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="post_no" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="adress1" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="adress2" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="birth_dt" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="reg_dt" Type="datetime" Nullable="false" />
+          <Property Name="edit_dt" Type="datetime" />
+        </EntityType>
+        <Function Name="up_coment_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="submit_seq" Type="int" Mode="In" />
+          <Parameter Name="coment" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="up_coment_select_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="submit_seq" Type="int" Mode="In" />
+          <Parameter Name="rowsPerPage" Type="int" Mode="In" />
+          <Parameter Name="pageNumber" Type="int" Mode="In" />
+          <Parameter Name="TotalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="up_submit_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="contents" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="hp1" Type="varchar" Mode="In" />
+          <Parameter Name="hp2" Type="varchar" Mode="In" />
+          <Parameter Name="hp3" Type="varchar" Mode="In" />
+          <Parameter Name="post_no" Type="varchar" Mode="In" />
+          <Parameter Name="adress1" Type="nvarchar" Mode="In" />
+          <Parameter Name="adress2" Type="nvarchar" Mode="In" />
+          <Parameter Name="birth_dt" Type="varchar" Mode="In" />
+          <Parameter Name="seq" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="up_submit_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="up_submit_selectdelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="seq" Type="int" Mode="In" />
+        </Function>
+        <Function Name="up_submit_selectdetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="seq" Type="int" Mode="In" />
+        </Function>
+        <Function Name="up_submit_selectList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="rowsPerPage" Type="int" Mode="In" />
+          <Parameter Name="pageNumber" Type="int" Mode="In" />
+          <Parameter Name="search_type" Type="tinyint" Mode="In" />
+          <Parameter Name="search_text" Type="nvarchar" Mode="In" />
+          <Parameter Name="rank_type" Type="tinyint" Mode="In" />
+          <Parameter Name="TotalRecords" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="up_submit_selectupdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="seq" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="contents" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="hp1" Type="varchar" Mode="In" />
+          <Parameter Name="hp2" Type="varchar" Mode="In" />
+          <Parameter Name="hp3" Type="varchar" Mode="In" />
+          <Parameter Name="post_no" Type="varchar" Mode="In" />
+          <Parameter Name="adress1" Type="nvarchar" Mode="In" />
+          <Parameter Name="adress2" Type="nvarchar" Mode="In" />
+          <Parameter Name="birth_dt" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="testModelStoreContainer">
+          <EntitySet Name="TB_COMENT" EntityType="Self.TB_COMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_SUBMIT" EntityType="Self.TB_SUBMIT" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="testEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="up_submit_insert">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="contents" Mode="In" Type="String" />
+            <Parameter Name="hp1" Mode="In" Type="String" />
+            <Parameter Name="hp2" Mode="In" Type="String" />
+            <Parameter Name="hp3" Mode="In" Type="String" />
+            <Parameter Name="post_no" Mode="In" Type="String" />
+            <Parameter Name="adress1" Mode="In" Type="String" />
+            <Parameter Name="adress2" Mode="In" Type="String" />
+            <Parameter Name="birth_dt" Mode="In" Type="String" />
+            <Parameter Name="seq" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="TB_SUBMIT" EntityType="testModel.TB_SUBMIT" />
+          <FunctionImport Name="up_submit_selectList" ReturnType="Collection(testModel.up_submit_selectList_Result)">
+            <Parameter Name="rowsPerPage" Mode="In" Type="Int32" />
+            <Parameter Name="pageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="search_type" Mode="In" Type="Byte" />
+            <Parameter Name="search_text" Mode="In" Type="String" />
+            <Parameter Name="rank_type" Mode="In" Type="Byte" />
+            <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="up_submit_list" ReturnType="Collection(testModel.up_submit_list_Result)">
+          <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="up_submit_selectdetail" ReturnType="Collection(testModel.up_submit_selectdetail_Result)">
+          <Parameter Name="seq" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="up_submit_selectupdate">
+            <Parameter Name="seq" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="contents" Mode="In" Type="String" />
+            <Parameter Name="hp1" Mode="In" Type="String" />
+            <Parameter Name="hp2" Mode="In" Type="String" />
+            <Parameter Name="hp3" Mode="In" Type="String" />
+            <Parameter Name="post_no" Mode="In" Type="String" />
+            <Parameter Name="adress1" Mode="In" Type="String" />
+            <Parameter Name="adress2" Mode="In" Type="String" />
+            <Parameter Name="birth_dt" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="up_submit_selectdelete">
+          <Parameter Name="seq" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="TB_COMENT" EntityType="testModel.TB_COMENT" />
+          <FunctionImport Name="up_coment_insert">
+            <Parameter Name="submit_seq" Mode="In" Type="Int32" />
+            <Parameter Name="coment" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="up_coment_select_list" ReturnType="Collection(testModel.up_coment_select_list_Result)">
+            <Parameter Name="submit_seq" Mode="In" Type="Int32" />
+            <Parameter Name="rowsPerPage" Mode="In" Type="Int32" />
+            <Parameter Name="pageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="TB_SUBMIT">
+          <Key>
+            <PropertyRef Name="seq" />
+          </Key>
+          <Property Name="seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="hp1" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="hp2" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="hp3" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="post_no" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="adress1" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="adress2" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="birth_dt" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="reg_dt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="edit_dt" Type="DateTime" Precision="3" />
+          <Property Name="title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="contents" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="submit_seq" Type="Int32" />
+          <Property Name="submit_no" Type="Int32" />
+          <Property Name="submit_depth" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="up_submit_selectList_Result">
+          <Property Type="Int32" Name="seq" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="hp1" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="hp2" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="hp3" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="post_no" Nullable="false" MaxLength="7" />
+          <Property Type="String" Name="adress1" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="adress2" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="birth_dt" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="title" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="contents" Nullable="true" />
+          <Property Type="DateTime" Name="reg_dt" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="submit_seq" Nullable="true" />
+          <Property Type="Int32" Name="submit_no" Nullable="true" />
+          <Property Type="Int32" Name="submit_depth" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="up_submit_list_Result">
+          <Property Type="Int32" Name="seq" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="hp1" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="hp2" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="hp3" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="post_no" Nullable="false" MaxLength="7" />
+          <Property Type="String" Name="adress1" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="adress2" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="birth_dt" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="up_submit_selectdetail_Result">
+          <Property Type="Int32" Name="seq" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="hp1" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="hp2" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="hp3" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="post_no" Nullable="false" MaxLength="7" />
+          <Property Type="String" Name="adress1" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="adress2" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="birth_dt" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="title" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="contents" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="TB_COMENT">
+          <Key>
+            <PropertyRef Name="seq" />
+          </Key>
+          <Property Name="seq" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="submit_seq" Type="Int32" />
+          <Property Name="coment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="reg_dt" Type="DateTime" Precision="3" />
+          <Property Name="edit_dt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <ComplexType Name="up_coment_select_list_Result">
+          <Property Type="Int32" Name="seq" Nullable="false" />
+          <Property Type="Int32" Name="submit_seq" Nullable="true" />
+          <Property Type="String" Name="coment" Nullable="true" />
+          <Property Type="DateTime" Name="reg_dt" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="testModelStoreContainer" CdmEntityContainer="testEntities">
+          <FunctionImportMapping FunctionImportName="up_submit_insert" FunctionName="testModel.Store.up_submit_insert" />
+          <EntitySetMapping Name="TB_SUBMIT">
+            <EntityTypeMapping TypeName="testModel.TB_SUBMIT">
+              <MappingFragment StoreEntitySet="TB_SUBMIT">
+                <ScalarProperty Name="submit_depth" ColumnName="submit_depth" />
+                <ScalarProperty Name="submit_no" ColumnName="submit_no" />
+                <ScalarProperty Name="submit_seq" ColumnName="submit_seq" />
+                <ScalarProperty Name="contents" ColumnName="contents" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="edit_dt" ColumnName="edit_dt" />
+                <ScalarProperty Name="reg_dt" ColumnName="reg_dt" />
+                <ScalarProperty Name="birth_dt" ColumnName="birth_dt" />
+                <ScalarProperty Name="adress2" ColumnName="adress2" />
+                <ScalarProperty Name="adress1" ColumnName="adress1" />
+                <ScalarProperty Name="post_no" ColumnName="post_no" />
+                <ScalarProperty Name="hp3" ColumnName="hp3" />
+                <ScalarProperty Name="hp2" ColumnName="hp2" />
+                <ScalarProperty Name="hp1" ColumnName="hp1" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="up_submit_selectList" FunctionName="testModel.Store.up_submit_selectList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="testModel.up_submit_selectList_Result">
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="hp1" ColumnName="hp1" />
+                <ScalarProperty Name="hp2" ColumnName="hp2" />
+                <ScalarProperty Name="hp3" ColumnName="hp3" />
+                <ScalarProperty Name="post_no" ColumnName="post_no" />
+                <ScalarProperty Name="adress1" ColumnName="adress1" />
+                <ScalarProperty Name="adress2" ColumnName="adress2" />
+                <ScalarProperty Name="birth_dt" ColumnName="birth_dt" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="contents" ColumnName="contents" />
+                <ScalarProperty Name="reg_dt" ColumnName="reg_dt" />
+                <ScalarProperty Name="submit_seq" ColumnName="submit_seq" />
+                <ScalarProperty Name="submit_no" ColumnName="submit_no" />
+                <ScalarProperty Name="submit_depth" ColumnName="submit_depth" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="up_submit_list" FunctionName="testModel.Store.up_submit_list">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="testModel.up_submit_list_Result">
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="hp1" ColumnName="hp1" />
+                <ScalarProperty Name="hp2" ColumnName="hp2" />
+                <ScalarProperty Name="hp3" ColumnName="hp3" />
+                <ScalarProperty Name="post_no" ColumnName="post_no" />
+                <ScalarProperty Name="adress1" ColumnName="adress1" />
+                <ScalarProperty Name="adress2" ColumnName="adress2" />
+                <ScalarProperty Name="birth_dt" ColumnName="birth_dt" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="up_submit_selectdetail" FunctionName="testModel.Store.up_submit_selectdetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="testModel.up_submit_selectdetail_Result">
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="hp1" ColumnName="hp1" />
+                <ScalarProperty Name="hp2" ColumnName="hp2" />
+                <ScalarProperty Name="hp3" ColumnName="hp3" />
+                <ScalarProperty Name="post_no" ColumnName="post_no" />
+                <ScalarProperty Name="adress1" ColumnName="adress1" />
+                <ScalarProperty Name="adress2" ColumnName="adress2" />
+                <ScalarProperty Name="birth_dt" ColumnName="birth_dt" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="contents" ColumnName="contents" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="up_submit_selectupdate" FunctionName="testModel.Store.up_submit_selectupdate" >
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="up_submit_selectdelete" FunctionName="testModel.Store.up_submit_selectdelete" />
+          <EntitySetMapping Name="TB_COMENT">
+            <EntityTypeMapping TypeName="testModel.TB_COMENT">
+              <MappingFragment StoreEntitySet="TB_COMENT">
+                <ScalarProperty Name="edit_dt" ColumnName="edit_dt" />
+                <ScalarProperty Name="reg_dt" ColumnName="reg_dt" />
+                <ScalarProperty Name="coment" ColumnName="coment" />
+                <ScalarProperty Name="submit_seq" ColumnName="submit_seq" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="up_coment_insert" FunctionName="testModel.Store.up_coment_insert" />
+          <FunctionImportMapping FunctionImportName="up_coment_select_list" FunctionName="testModel.Store.up_coment_select_list">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="testModel.up_coment_select_list_Result">
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="submit_seq" ColumnName="submit_seq" />
+                <ScalarProperty Name="coment" ColumnName="coment" />
+                <ScalarProperty Name="reg_dt" ColumnName="reg_dt" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

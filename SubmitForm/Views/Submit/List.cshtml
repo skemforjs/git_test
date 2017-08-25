@@ -1,0 +1,132 @@
+﻿@model SubmitForm.Models.TB_SUBMIT_LIST
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="submit_wrap">
+    <div class="list" id="target">
+        @using (Html.BeginForm(null, null, FormMethod.Get, new { @class = "List", @id = "List" }))
+        {
+            <input id="search_h" name="search_h" type="hidden">
+            <input id="search_type_h" name="search_type_h" type="hidden">
+            <input id="rank_type_h" name="rank_type_h" type="hidden">
+            <input id="row_page_h" name="row_page_h" type="hidden">            
+            @*@Html.DropDownListFor(m => m.search_list.row_page_h, new SelectList(Convert.ToString(Model.search_list.row_page_h), "ContribId", "Value"))*@
+            @Html.DropDownListFor(m => m.search_list.row_page, new SelectList(
+                  new List<Object>{
+                       new { value = 10 , text = "10개보기" },
+                       new { value = 20 , text = "20개보기" },
+                       new { value = 30 , text = "30개보기" }
+                    },
+                  "value",
+                  "text",
+                   ViewBag.rowsPerPage))
+            @Html.DropDownListFor(m => m.search_list.search_type, new SelectList(
+                  new List<Object>{
+                       new { value = 1 , text = "이름" },
+                       new { value = 2 , text = "생일" },
+                    },
+                  "value",
+                  "text",
+                   ViewBag.searchtype))  
+            @Html.TextBoxFor(m => m.search_list.search_text, new { id = "search" , @Value = ViewBag.search })
+            <button id="search_btn" type="submit">검색</button>
+            <table>
+                <colgroup>
+                    @*<col style="width:5%;" />*@
+                    @*<col style="width:10%;" />*@
+                    <col style="width:80%;" />                    
+                    @*<col style="width:15%;" />
+                    <col style="width:20%;" />
+                    <col style="width:15%;" />*@
+                    <col style="width:20%;" />
+                </colgroup>
+                <tr>
+                    @*<th>No</th>*@
+                    @*<th>이름<span class="rank_type"name="10">▲</span><span class="rank_type"name="0">▼</span></th>*@
+                    <th>제목</th>                    
+                    @*<th>전화번호</th>
+                    <th>주소</th>
+                    <th>생일<span class="rank_type"name="11">▲</span><span class="rank_type"name="1">▼</span></th>*@
+                    <th>등록일<span class="rank_type" name="12">▲</span><span class="rank_type" name="2">▼</span></th>
+                </tr>
+                @if (Model.submit_list != null && Model.submit_list.Count != 0)
+                {
+                    int no = ViewBag.total - ((ViewBag.nowpage - 1) * ViewBag.rowsPerPage);
+                    foreach (var item in Model.submit_list)
+                    {
+                        <tr>
+                            @*<td>@(no--)</td>*@
+                            @*<td>@item.name</td>*@
+                            <td>
+                                @if (item.submit_depth == 1)
+                                {
+                                    <a href="/Submit/Detail?seq=@item.seq">@item.title</a>
+                                }
+                                else if (item.submit_depth > 1)
+                                {
+                                    <a style="margin-left:(@item.submit_depth)0px;" href="/Submit/Detail?seq=@item.seq">@item.title</a>
+                                }
+                            </td>
+                            @*<td>@item.hp1 - @item.hp2 - @item.hp3</td>
+                            <td>@item.post_no @item.adress1 @item.adress2</td>
+                            <td>@item.birth_dt</td>*@
+                            <td>@item.reg_dt</td>
+                        </tr>
+                    }
+                }
+                else {
+                    <tr>
+                        <td style="text-align:center;" colspan="2">리스트가 없습니다.</td>
+                    </tr>
+                }
+            </table>            
+            <div class="paging">
+                @*@if (ViewBag.totalblock == 1)
+                {
+                <span class="nowpage">1</span>
+                }*@
+                @if (ViewBag.firstpage != 1)
+                {
+                    <span onclick="location.href='/Submit/List?search_h=@ViewBag.search&search_type_h=@ViewBag.searchtype&rank_type_h=@ViewBag.ranktype&row_page_h=@ViewBag.rowsPerPage&pageNumber=1'">&lt;&lt;</span>
+                    <span onclick="location.href='/Submit/List?search_h=@ViewBag.search&search_type_h=@ViewBag.searchtype&rank_type_h=@ViewBag.ranktype&row_page_h=@ViewBag.rowsPerPage&pageNumber=@(ViewBag.firstpage - 1)'">&lt;</span>
+                }
+                @for (int? i = ViewBag.firstpage; i <= ViewBag.lastpage; i++)
+                {                    
+                    if (ViewBag.nowpage == i)
+                    {
+                        <span class="nowpage">@i</span>
+                    }
+                    else
+                    {
+                        <span onclick="location.href='/Submit/List?search_h=@ViewBag.search&search_type_h=@ViewBag.searchtype&rank_type_h=@ViewBag.ranktype&row_page_h=@ViewBag.rowsPerPage&pageNumber=@i'">@i</span>
+                    }
+                }
+                @if (ViewBag.lastpage != ViewBag.totalblock)
+                {
+                    <span onclick="location.href='/Submit/List?search_h=@ViewBag.search&search_type_h=@ViewBag.searchtype&rank_type_h=@ViewBag.ranktype&row_page_h=@ViewBag.rowsPerPage&pageNumber=@(ViewBag.lastpage + 1)'">&gt;</span>
+                    <span onclick="location.href='/Submit/List?search_h=@ViewBag.search&search_type_h=@ViewBag.searchtype&rank_type_h=@ViewBag.ranktype&row_page_h=@ViewBag.rowsPerPage&pageNumber=@(ViewBag.totalblock)'">&gt;&gt;</span>
+                }            
+            </div>
+        }
+    </div>
+</div>
+<script>
+    $(function () {
+        $('#search_btn').click(function () {
+            $('#search_h').attr('value', $('#search').val());
+            $('#search_type_h').attr('value', $("#search_list_search_type option:selected").val());
+            $("#search_type").val($("#search_list_search_type option:selected").val());
+            $('#row_page_h').attr('value', $('#search_list_row_page option:selected').val());
+
+        })
+        $('.rank_type').click(function () {
+            var ranktype = $(this).attr('name');
+            $('#rank_type_h').attr('value', $(this).attr('name'));
+            $('#search_h').attr('value', $('#search').val());
+            $('#search_type_h').attr('value', $("#search_list_search_type option:selected").val());
+            $("#search_list_search_type").val($("#search_list_search_type option:selected").val());
+            $('#row_page_h').attr('value', $('#search_list_row_page option:selected').val());
+            $('#List').submit();
+        })        
+    })
+</script>

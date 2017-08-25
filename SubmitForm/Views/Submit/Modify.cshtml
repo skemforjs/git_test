@@ -1,0 +1,55 @@
+﻿@model SubmitForm.Models.up_submit_selectdetail_Result
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="submit_wrap">
+    <div class="detail">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "detail", @id = "detail" }))
+        {
+            @Html.HiddenFor(m => m.seq)
+            <table>
+                <colgroup>
+                    <col style="width:30%;" />
+                    <col />
+                </colgroup>
+                <tr>
+                    <th>이름</th>
+                    <td>@Html.TextBoxFor(m => m.name)</td>
+                </tr>
+                <tr>
+                    <th>제목</th>
+                    <td>@Html.TextBoxFor(m => m.title)</td>
+                </tr>                
+                <tr>
+                    <th>전화번호</th>
+                    <td>@Html.TextBoxFor(m => m.hp1) - @Html.TextBoxFor(m => m.hp2) - @Html.TextBoxFor(m => m.hp3)</td>
+                </tr>
+                <tr>
+                    <th>주소</th>
+                    <td>
+                        @Html.TextBoxFor(m => m.post_no)<br />
+                        @Html.TextBoxFor(m => m.adress1) @Html.TextBoxFor(m => m.adress2)
+                    </td>
+                </tr>
+                <tr>
+                    <th>생일</th>
+                    <td>@Html.TextBoxFor(m => m.birth_dt)</td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td>@Html.TextAreaFor(m => m.contents)</td>
+                </tr>
+            </table>
+            <input type="submit" href="/Submit/Detail?seq=@Model.seq" value="저장하기" />
+            <div><a href="/Submit/List">목록</a></div>
+            <div>삭제</div>
+        }
+    </div>
+</div>
+
+<script>
+    CKEDITOR.replace('contents', {
+        enterMode: '2'
+    });
+    CKEDITOR.instances.contents.getData();
+</script>
